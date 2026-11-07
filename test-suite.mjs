@@ -3,7 +3,7 @@
  * Testa l'handler di api/contact.js simulando scenari di utilizzo reali e attacchi di spam.
  */
 
-import handler from './api/contact.js';
+import handler from './api/contact.ts';
 
 // Helper per creare un mock di VercelRequest e VercelResponse
 function createMockContext({ method = 'POST', body = {}, headers = {} }) {

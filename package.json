@@ -6,9 +6,9 @@
   "type": "module",
   "main": "api/contact.ts",
   "scripts": {
-    "dev": "node dev-server.mjs",
-    "test": "node test-suite.mjs",
-    "typecheck": "tsc --noEmit",
+    "dev": "node --no-warnings --experimental-strip-types dev-server.mjs",
+    "test": "node --no-warnings --experimental-strip-types test-suite.mjs",
+    "typecheck": "tsc",
     "build": "tsc"
   },
   "dependencies": {

@@ -37,13 +37,13 @@ const MIME_TYPES = {
   '.ico': 'image/x-icon',
 };
 
-// Importa l'handler serverless compilato
+// Importa l'handler serverless (TypeScript)
 let contactHandler;
 try {
-  const module = await import('./api/contact.js');
+  const module = await import('./api/contact.ts');
   contactHandler = module.default;
 } catch (err) {
-  console.error('Errore durante l importazione di api/contact.js:', err);
+  console.error("Errore durante l'importazione di api/contact.ts:", err);
 }
 
 const server = http.createServer(async (req, res) => {
