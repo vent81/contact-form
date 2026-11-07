@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Modulo di Contatto</title>
+  <meta name="description" content="Contattaci per informazioni, supporto o preventivi." />
+  <link rel="stylesheet" href="/css/style.css" />
+  <!-- Cloudflare Turnstile (script asincrono) -->
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" async defer></script>
+</head>
+<body>
+  <main class="page-container">
+    <div class="card">
+      <header class="card-header">
+        <div class="badge">Parla con noi</div>
+        <h1>Contattaci</h1>
+        <p class="subtitle">Hai una domanda, un progetto o vuoi richiedere un preventivo? Compila il modulo sottostante e ti risponderemo entro 24 ore.</p>
+      </header>
+
+      <!-- Banner per notifiche di successo o errore -->
+      <div id="statusMessage" class="status-banner" role="alert" aria-live="polite" hidden></div>
+
+      <form id="contactForm" novalidate>
+        <!-- Campo Honeypot Anti-Spam: invisibile agli utenti umani, compilato solo dai bot -->
+        <div class="honeypot-wrap" aria-hidden="true">
+          <label for="hp_company_field">Non compilare questo campo</label>
+          <input 
+            type="text" 
+            id="hp_company_field" 
+            name="hp_company_field" 
+            tabindex="-1" 
+            autocomplete="off" 
+          />
+        </div>
+
+        <div class="grid-2">
+          <!-- Nome e Cognome -->
+          <div class="form-group">
+            <label for="fullName">Nome e Cognome <span class="required">*</span></label>
+            <input 
+              type="text" 
+              id="fullName" 
+              name="fullName" 
+              placeholder="es. Mario Rossi" 
+              required 
+              minlength="2" 
+              maxlength="120" 
+              autocomplete="name" 
+            />
+            <span class="field-error" id="error-fullName"></span>
+          </div>
+
+          <!-- Email -->
+          <div class="form-group">
+            <label for="email">Indirizzo Email <span class="required">*</span></label>
+            <input 
+              type="email" 
+              id="email" 
+              name="email" 
+              placeholder="mario.rossi@esempio.it" 
+              required 
+              maxlength="255" 
+              autocomplete="email" 
+            />
+            <span class="field-error" id="error-email"></span>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <!-- Telefono (Opzionale) -->
+          <div class="form-group">
+            <label for="phone">Telefono <span class="optional">(Opzionale)</span></label>
+            <input 
+              type="tel" 
+              id="phone" 
+              name="phone" 
+              placeholder="+39 340 1234567" 
+              maxlength="30" 
+              autocomplete="tel" 
+            />
+            <span class="field-error" id="error-phone"></span>
+          </div>
+
+          <!-- Oggetto -->
+          <div class="form-group">
+            <label for="subject">Oggetto <span class="required">*</span></label>
+            <input 
+              type="text" 
+              id="subject" 
+              name="subject" 
+              placeholder="Richiesta di informazioni" 
+              required 
+              minlength="3" 
+              maxlength="200" 
+            />
+            <span class="field-error" id="error-subject"></span>
+          </div>
+        </div>
+
+        <!-- Messaggio -->
+        <div class="form-group">
+          <label for="message">Messaggio <span class="required">*</span></label>
+          <textarea 
+            id="message" 
+            name="message" 
+            rows="5" 
+            placeholder="Descrivi brevemente la tua richiesta o il tuo progetto..." 
+            required 
+            minlength="10" 
+            maxlength="5000"
+          ></textarea>
+          <div class="textarea-footer">
+            <span class="field-error" id="error-message"></span>
+            <span class="char-count" id="charCount">0 / 5000</span>
+          </div>
+        </div>
+
+        <!-- Consenso Privacy (GDPR) -->
+        <div class="form-group checkbox-group">
+          <label class="checkbox-container">
+            <input type="checkbox" id="privacyConsent" name="privacyConsent" required />
+            <span class="checkmark"></span>
+            <span class="checkbox-label">
+              Ho letto e accetto l'<a href="#privacy" class="link" target="_blank" rel="noopener">Informativa sulla Privacy</a> e acconsento al trattamento dei miei dati personali. <span class="required">*</span>
+            </span>
+          </label>
+          <span class="field-error" id="error-privacyConsent"></span>
+        </div>
+
+        <!-- Widget Cloudflare Turnstile (Anti-Bot) -->
+        <div id="turnstile-container" class="turnstile-wrapper"></div>
+        <span class="field-error" id="error-turnstileToken"></span>
+
+        <!-- Pulsante di Invio -->
+        <div class="form-actions">
+          <button type="submit" id="submitBtn" class="btn btn-primary">
+            <span class="btn-text">Invia Messaggio</span>
+            <span class="spinner" aria-hidden="true" hidden></span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </main>
+
+  <script src="/js/contact.js"></script>
+</body>
+</html>
